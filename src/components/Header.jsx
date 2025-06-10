@@ -7,6 +7,7 @@ import { Link } from 'react-router-dom';
 const Header = () => {
   const location = useLocation();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [hoveredPath, setHoveredPath] = useState(null);
 
   const navItems = [
     { name: 'Accueil', to: '/' },
@@ -68,18 +69,37 @@ const Header = () => {
         {/* DESKTOP FLEX: menu Ã  gauche, logo Ã  droite */}
         <div className="header-flex-extremes">
           <nav className="nav-menu nav-menu-left">
-            {navItems.map((item, index) => (
-              <motion.div
-                key={item.name}
-                initial={{ opacity: 0, y: -10 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: index * 0.1 }}
-              >
-                <Link to={item.to} className={`nav-link${location.pathname === item.to ? ' active' : ''}`}>
-                  {item.name}
-                </Link>
-              </motion.div>
-            ))}
+            {navItems.map((item, index) => {
+              const isActive = location.pathname === item.to;
+              const isHovered = hoveredPath === item.to;
+              return (
+                <motion.div
+                  key={item.name}
+                  className="relative py-2" // Padding pour l'agrandissement
+                  onMouseEnter={() => setHoveredPath(item.to)}
+                  onMouseLeave={() => setHoveredPath(null)}
+                  initial={{ opacity: 0, y: -10 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.5, delay: index * 0.1 }}
+                >
+                  <Link to={item.to} className="nav-link" style={{ textDecoration: 'none' }}>
+                    <motion.span
+                      className="inline-block"
+                      animate={{ scale: isActive || isHovered ? 1.1 : 1 }}
+                      transition={{ type: 'spring', stiffness: 300, damping: 20 }}
+                    >
+                      {item.name}
+                    </motion.span>
+                  </Link>
+                  {(isActive || isHovered) && (
+                    <motion.div
+                      className="absolute bottom-0 left-0 w-full h-[2px] bg-primary"
+                      layoutId="underline"
+                    />
+                  )}
+                </motion.div>
+              );
+            })}
           </nav>
           <motion.a
             href="#accueil"

@@ -5,12 +5,12 @@ import { motion } from 'framer-motion';
 import { products } from '../components/Products';
 
 const ProductDetail = () => {
-  const { id } = useParams();
+  const { categoryId, productId } = useParams();
   const navigate = useNavigate();
   const [product, setProduct] = useState(null);
 
   useEffect(() => {
-    const foundProduct = products.find(p => p.id === parseInt(id));
+    const foundProduct = products.find(p => p.id === parseInt(productId));
     if (foundProduct) {
       setProduct(foundProduct);
       document.title = `${foundProduct.name} - Plastoblast`;
@@ -18,7 +18,7 @@ const ProductDetail = () => {
       // Rediriger vers la page des produits si le produit n'est pas trouvé
       navigate('/products');
     }
-  }, [id, navigate]);
+  }, [productId, navigate]);
 
   if (!product) {
     return (
@@ -32,7 +32,7 @@ const ProductDetail = () => {
     <section className="section-padding bg-gray-50">
       <div className="container-custom">
         <motion.button
-          onClick={() => navigate(-1)}
+          onClick={() => navigate(`/products/${categoryId}`)}
           className="flex items-center bg-[#1a5d33] hover:bg-[#2d8f4f] text-white px-4 py-2 rounded-lg font-medium mb-6 transition-colors"
           whileHover={{ scale: 1.02 }}
           whileTap={{ scale: 0.98 }}

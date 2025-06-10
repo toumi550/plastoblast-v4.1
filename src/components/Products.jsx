@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Download, Eye, ShoppingCart, Filter, Search, ArrowLeft } from 'lucide-react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { Search, Eye, Download, ArrowLeft, ShoppingCart, Box, PanelTop } from 'lucide-react';
+import { useNavigate, useParams, Link } from 'react-router-dom';
 
 export const products = [
   // Boîtes de jonction
@@ -248,111 +248,150 @@ export const products = [
   }
 ];
 
-const Products = ({ defaultCategory }) => {
+export const displayableCategories = [
+  {
+    id: 'boites',
+    name: 'Boîtes de Jonction',
+    description: 'Découvrez notre gamme de boîtes de jonction étanches pour vos installations extérieures.',
+    image: '/images/boite-jonction-etanche-camera-dahua-hikvision-3.webp',
+    count: products.filter(p => p.category === 'boites').length,
+    IconComponent: Box
+  },
+  {
+    id: 'supports',
+    name: 'Supports Muraux',
+    description: 'Supports robustes et réglables pour une installation optimale de vos caméras.',
+    image: '/images/support-mural-22.webp',
+    count: products.filter(p => p.category === 'supports').length,
+    IconComponent: PanelTop
+  }
+];
+
+const Products = () => {
   const navigate = useNavigate();
-  const location = useLocation();
-
-  const handleViewDetails = (productId) => {
-    navigate(`/products/${productId}`);
-  };
-
-  const categoryFromUrl = location.pathname.includes('supports-muraux') 
-    ? 'supports' 
-    : location.pathname.includes('boites-de-jonction') 
-      ? 'boites' 
-      : null;
-
-  const [selectedCategory, setSelectedCategory] = useState(categoryFromUrl || defaultCategory || 'all');
+  const { categoryId } = useParams(); // categoryId peut être 'boites', 'supports', ou undefined
   const [searchTerm, setSearchTerm] = useState('');
 
-  useEffect(() => {
-    if (categoryFromUrl) {
-      setSelectedCategory(categoryFromUrl);
-    }
-  }, [categoryFromUrl]);
-
-  const formatText = (text) => {
-    if (!text) return '';
-    return text
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .toLowerCase();
+  const handleViewDetails = (productId) => {
+    // Assure que categoryId est inclus dans le lien pour la page détail
+    navigate(`/products/${categoryId}/${productId}`);
   };
 
-  const categories = [
-    { id: 'all', name: 'Toutes les catégories', count: products.length },
-    { 
-      id: 'boites', 
-      name: 'Boîtes de Jonction', 
-      count: products.filter(p => p.category === 'boites').length 
-    },
-    { 
-      id: 'supports', 
-      name: 'Supports Muraux', 
-      count: products.filter(p => p.category === 'supports').length 
-    },
-  ];
+  // Détermine la catégorie actuellement sélectionnée à partir de l'URL
+  const currentCategoryDetails = categoryId 
+    ? displayableCategories.find(cat => cat.id === categoryId)
+    : null;
 
-  const handleCategoryClick = (categoryId) => {
-    if (categoryId === 'all') {
-      navigate('/products');
-    } else if (categoryId === 'supports') {
-      navigate('/products/supports-muraux');
-    } else if (categoryId === 'boites') {
-      navigate('/products/boites-de-jonction');
-    }
-  };
+  // Filtre les produits si une catégorie est sélectionnée
+  const productsToList = categoryId
+    ? products.filter(product => product.category === categoryId)
+    : []; // Si aucune catégorie n'est sélectionnée, on n'affiche pas de liste de produits ici
 
-  const filteredProducts = products.filter(product => {
-    const matchesCategory = selectedCategory === 'all' || product.category === selectedCategory;
-    const matchesSearch = product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         product.description.toLowerCase().includes(searchTerm.toLowerCase());
-    return matchesCategory && matchesSearch;
-  });
+  // Filtre les produits en fonction du terme de recherche (uniquement si une catégorie est sélectionnée)
+  const filteredProducts = categoryId
+    ? productsToList.filter(product => 
+        product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+        product.description.toLowerCase().includes(searchTerm.toLowerCase())
+      )
+    : [];
 
-  console.log('filteredProducts', filteredProducts, 'products', products);
+  // Si categoryId est défini mais n'est pas une catégorie valide, on pourrait rediriger ou afficher un message
+  // Pour l'instant, on assume que les categoryId dans l'URL seront valides (boites, supports)
+  // Ou si currentCategoryDetails est null après une tentative de find, cela signifie une catégorie invalide.
 
+  if (categoryId && !currentCategoryDetails) {
+    // Optionnel : Gérer le cas d'un categoryId invalide dans l'URL
+    // Par exemple, rediriger vers /products ou afficher un message "Catégorie non trouvée"
+    // Pour l'instant, cela affichera un titre vide et aucun produit.
+    console.warn(`Catégorie avec id '${categoryId}' non trouvée.`);
+  }
+
+  // Vue pour afficher les catégories
+  if (!categoryId) {
+    return (
+      <section id="product-categories" className="section-padding" style={{ paddingTop: '140px', paddingBottom: '40px', marginTop: '0' }}>
+        <div className="container-custom">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center mb-12"
+          >
+            <h2 className="section-title">Nos Catégories de Produits</h2>
+            <p className="section-subtitle">Parcourez nos solutions professionnelles.</p>
+          </motion.div>
+          <div className="categories-grid" style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '2rem' }}>
+            {displayableCategories.map(category => (
+              <motion.div
+                key={category.id}
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.4, ease: 'easeInOut' }}
+                whileHover={{ y: -8, scale: 1.03, boxShadow: '0 12px 24px rgba(0,0,0,0.15)' }}
+                viewport={{ once: true }}
+                className="category-card"
+                style={{ border: '1px solid #eee', borderRadius: '8px', overflow: 'hidden', boxShadow: '0 4px 6px rgba(0,0,0,0.1)', cursor: 'pointer' }}
+              >
+                <Link to={`/products/${category.id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
+                  <div style={{ height: '250px', padding: '1rem', backgroundColor: '#f8f9fa', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                    <motion.img 
+                      src={category.image} 
+                      alt={`Image pour ${category.name}`} 
+                      style={{ maxHeight: '100%', maxWidth: '100%', objectFit: 'contain' }} 
+                      onError={(e) => { e.target.onerror = null; e.target.src='/images/placeholder-fallback.jpg'; }} // Fallback image
+                      transition={{ duration: 0.3 }}
+                      whileHover={{ scale: 1.05 }}
+                    />
+                  </div>
+                  <div style={{ padding: '1rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', marginBottom: '0.75rem' }}>
+                      {category.IconComponent && <category.IconComponent size={28} style={{ marginRight: '0.75rem', color: '#1a5d33', flexShrink: 0 }} />}
+                      <h3 style={{ margin: '0', fontSize: '1.3rem', fontWeight: '600', color: '#333' }}>{category.name}</h3>
+                    </div>
+                    <p style={{ fontSize: '0.9rem', color: '#555', marginBottom: '0.75rem', lineHeight: '1.5' }}>{category.description}</p>
+                    <p style={{ fontSize: '0.85rem', color: '#777', fontWeight: '500' }}>{category.count} produits disponibles</p>
+                  </div>
+                </Link>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+    );
+  }
+
+  // Vue pour afficher les produits d'une catégorie sélectionnée
   return (
     <section 
-      id="produits" 
+      id="produits-categorie" 
       className="section-padding"
-      style={{
-        paddingTop: '140px', /* Augmentation de l'espace pour le header fixe */
-        paddingBottom: '40px',
-        marginTop: '0' /* Réinitialisation de toute marge */
-      }}
+      style={{ paddingTop: '140px', paddingBottom: '40px', marginTop: '0' }}
     >
       <div className="container-custom">
-        {/* Bouton de retour - visible uniquement sur les pages de catégorie */}
-        {defaultCategory && (
-          <motion.div 
-            className="back-button-container"
-            initial={{ opacity: 0, y: 10 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.4 }}
-            style={{
-              width: '100%',
-              display: 'flex',
-              justifyContent: 'flex-start',
-              padding: '0.5rem 1rem 0',
-              marginTop: 'calc(env(safe-area-inset-top, 0px) + 70px)', // Ajustement pour header fixe
-              marginBottom: '1rem',
-              position: 'relative',
-              zIndex: 10
-            }}
+        <motion.div 
+          className="back-button-container mb-4"
+          initial={{ opacity: 0, y: -10 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.4 }}
+          style={{
+            width: '100%',
+            display: 'flex',
+            justifyContent: 'flex-start',
+            // marginTop: 'calc(env(safe-area-inset-top, 0px) + 70px)', // Peut-être pas nécessaire si paddingTop est suffisant
+          }}
+        >
+          <motion.button
+            onClick={() => navigate('/products')}
+            className="back-button"
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
+            aria-label="Retour aux catégories"
           >
-            <motion.button
-              onClick={() => navigate('/products')}
-              className="back-button"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              aria-label="Retour à la liste des produits"
-            >
-              <ArrowLeft size={18} aria-hidden="true" />
-              <span>Retour aux produits</span>
-            </motion.button>
-          </motion.div>
-        )}
+            <ArrowLeft size={18} aria-hidden="true" />
+            <span>Retour aux catégories</span>
+          </motion.button>
+        </motion.div>
         
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -362,44 +401,25 @@ const Products = ({ defaultCategory }) => {
           className="text-center mb-12"
         >
           <h2 className="section-title">
-            {defaultCategory === 'supports' && 'Nos Supports Muraux'}
-            {defaultCategory === 'boites' && 'Nos Boîtes de Jonction'}
-            {!defaultCategory && 'Nos Produits'}
+            {currentCategoryDetails ? currentCategoryDetails.name : 'Produits'}
           </h2>
           <p className="section-subtitle">
-            Solutions professionnelles pour la sécurité et la surveillance
+            {currentCategoryDetails ? currentCategoryDetails.description : 'Solutions professionnelles pour la sécurité et la surveillance'}
           </p>
         </motion.div>
 
-        {/* Barre de recherche et filtres */}
-        {!defaultCategory && (
-          <div className="product-filters">
+        <div className="product-filters" style={{ marginBottom: '2rem' }}>
           <div className="search-bar">
             <Search size={20} />
             <input
               type="text"
-              placeholder="Rechercher un produit..."
+              placeholder={`Rechercher dans ${currentCategoryDetails ? currentCategoryDetails.name : 'les produits'}...`}
               value={searchTerm}
               onChange={(e) => setSearchTerm(e.target.value)}
             />
           </div>
-
-          <div className="category-filters">
-            {categories.map((category) => (
-              <button
-                key={category.id}
-                onClick={() => handleCategoryClick(category.id)}
-                className={`filter-button ${selectedCategory === category.id ? 'active' : ''}`}
-              >
-                {category.name}
-                <span className="filter-count">{category.count}</span>
-              </button>
-            ))}
-          </div>
         </div>
-        )}
 
-        {/* Grille de produits */}
         <div className="products-grid">
           {filteredProducts.map((product, index) => (
             <React.Fragment key={product.id}>
@@ -413,17 +433,17 @@ const Products = ({ defaultCategory }) => {
               <div className="product-image">
                 <img
                   src={product.image}
-                  alt={product.altText || `Image de ${product.name} - ${categories.find(c => c.id === product.category)?.name || product.category} compatible Dahua et Hikvision`}
+                  alt={product.altText || `Image de ${product.name}`}
                   className="product-image-modern"
                   loading="lazy"
+                  onError={(e) => { e.target.onerror = null; e.target.src='/images/placeholder-fallback.jpg'; }} // Fallback image
                 />
                 <div className="product-overlay">
-                  <button className="btn-icon" aria-label={`Voir les détails de ${product.name}`}>
+                  <button className="btn-icon" onClick={() => handleViewDetails(product.id)} aria-label={`Voir les détails de ${product.name}`}>
                     <Eye size={20} />
                   </button>
-                  <button className="btn-icon" aria-label={`Télécharger la fiche de ${product.name}`}>
-                    <Download size={20} />
-                  </button>
+                  {/* Optionnel: bouton de téléchargement si vous avez des fiches produits individuelles */}
+                  {/* <button className="btn-icon" aria-label={`Télécharger la fiche de ${product.name}`}><Download size={20} /></button> */}
                 </div>
               </div>
               <div className="product-content">
@@ -482,7 +502,8 @@ const Products = ({ defaultCategory }) => {
                     "@type": "Offer",
                     "availability": "https://schema.org/InStock",
                     "priceCurrency": "DZD",
-                    "url": `https://plastoblast.com/products#${product.name.replace(/\s/g, '-')}`
+                    // Mettre à jour l'URL pour inclure categoryId si possible, ou une URL produit unique
+                    "url": `https://plastoblast.com/products/${categoryId}/${product.id}` 
                   }
                 }) }}
               />
@@ -490,10 +511,9 @@ const Products = ({ defaultCategory }) => {
           ))}
         </div>
 
-        {/* Message si aucun produit */}
-        {filteredProducts.length === 0 && (
-          <div className="no-products">
-            <p>Aucun produit ne correspond à votre recherche.</p>
+        {categoryId && filteredProducts.length === 0 && (
+          <div className="no-products" style={{ textAlign: 'center', marginTop: '2rem' }}>
+            <p>Aucun produit ne correspond à votre recherche dans cette catégorie.</p>
           </div>
         )}
       </div>
