@@ -45,6 +45,12 @@ const Home = () => {
       }` }} />
       <section id="home">
         <Hero />
+        <section className="py-12 bg-white">
+          <div className="container mx-auto px-6 text-center">
+            <h2 className="text-3xl font-bold text-gray-800 mb-8">Découvrez Notre Gamme Complète</h2>
+            <img src="/images/tous-les-produits.webp" alt="Gamme complète des produits Plastoblast" className="mx-auto max-w-full h-auto rounded-lg shadow-lg" />
+          </div>
+        </section>
         <FeaturedProducts />
         <About />
         <Compatibility />

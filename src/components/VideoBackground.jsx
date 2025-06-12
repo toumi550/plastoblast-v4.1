@@ -65,13 +65,13 @@ const VideoBackground = () => {
           left: 0;
           width: 100%;
           height: 100%;
-          background: rgba(255, 255, 255, 0.3); /* Ajustez l'opacité selon vos besoins */
+          background: rgba(255, 255, 255, 0.1); /* Opacité réduite */
           z-index: 2;
         }
         
         @media (max-width: 768px) {
           .video-overlay {
-            background: rgba(255, 255, 255, 0.4); /* Overlay plus foncé sur mobile pour une meilleure lisibilité */
+            background: rgba(255, 255, 255, 0.1); /* Opacité réduite sur mobile */
           }
         }
       `}</style>

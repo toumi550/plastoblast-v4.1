@@ -9,14 +9,14 @@ export const products = [
     id: 1,
     name: 'CBOX-AJ120',
     category: 'boites',
-    image: '/images/products/plastoblast-030.webp',
+    image: '/images/products/boite-jonction-aj120-camera-cctv-dahua-hikvision.webp',
     altText: 'Boîte de jonction CBOX-AJ120, hautement résistante et étanche pour caméras dôme ou bullet CCTV, compatible Dahua et Hikvision.',
     description: 'Boîte de jonction CBOX-AJ120 hautement résistante et étanche pour caméras dôme ou bullet. Idéale pour installations Dahua et Hikvision.',
     features: [
       'Compatibilité quasi universelle',
-      'Supporte jusqu\\\'à 150 kg',
+      'Supporte jusqu\'à 150 kg',
       'Matériaux premium PP anti-UV',
-      'Joint d\\\'étanchéité intégré'
+      'Joint d\'étanchéité intégré'
     ],
     specs: {
       dimensions: '40 × 125 × 45 mm',
@@ -29,7 +29,7 @@ export const products = [
     id: 2,
     name: 'CBOX-AJ140',
     category: 'boites',
-    image: '/images/products/plastoblast-030.webp', // Remplacement temporaire - image spécifique manquante
+    image: '/images/products/boite-jonction-aj140-camera-cctv-dahua-hikvision.webp',
     altText: 'Boîte de jonction premium CBOX-AJ140 pour installations extérieures exigeantes de caméras CCTV, compatible Dahua et Hikvision.',
     description: 'Boîte de jonction premium CBOX-AJ140 pour installations extérieures exigeantes. Parfaite pour caméras Dahua et Hikvision.',
     features: [
@@ -49,19 +49,40 @@ export const products = [
     id: 3,
     name: 'CBOX-SJ110',
     category: 'boites',
-    image: '/images/products/SJ110-2.webp',
-    altText: 'Boîte de jonction compacte CBOX-SJ110 pour caméras de surveillance CCTV, compatible Dahua et Hikvision.',
-    description: 'Boîte de jonction compacte CBOX-SJ110 pour caméras de surveillance. Adaptée pour Dahua et Hikvision.',
+    image: '/images/products/boite-jonction-sj110-camera-cctv-dome-bullet-dahua-hikvision.webp',
+    altText: 'Boîte de jonction compacte et étanche CBOX-SJ110 pour caméras dome/bullet, compatible Dahua et Hikvision.',
+    description: 'Boîte de jonction compacte et étanche CBOX-SJ110 pour caméras dome/bullet, plastique traité utilisable en extérieur/intérieur. Adaptée pour Dahua et Hikvision.',
     features: [
       'Design compact',
       'Installation simple',
-      'Matériaux résistants',
-      'Étanchéité garantie'
+      'Étanchéité garantie',
+      'Plage de diamètres 28~90 mm',
+      '200 Pièces/carton'
     ],
     specs: {
-      dimensions: '110 × 110 × 50 mm',
+      dimensions: '50 (H) x 113 (L) x 45 (Pr) mm',
       poids: '150 g',
       charge: '100 kg',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 13,
+    name: 'CBOX-AJ140mm',
+    category: 'boites',
+    image: '/images/products/boite-jonction-aj140mm-grande-camera-cctv-dahua-hikvision.webp',
+    altText: 'Grande boîte de jonction CBOX-AJ140mm pour installations complexes de caméras CCTV.',
+    description: 'Grande boîte de jonction CBOX-AJ140mm, conçue pour offrir un espace maximal et une protection robuste pour les installations de vidéosurveillance complexes.',
+    features: [
+      'Grand volume intérieur',
+      'Construction robuste',
+      'Multiples points d\'entrée',
+      'Protection IP66'
+    ],
+    specs: {
+      dimensions: '140 x 140 x 60 mm',
+      poids: '250 g',
+      matériau: 'ABS renforcé',
       couleur: 'Blanc'
     }
   },
@@ -77,7 +98,9 @@ export const products = [
       'Longueur 15cm',
       'Installation murale',
       'Alliage résistant',
-      'Finition anti-corrosion'
+      'Finition anti-corrosion',
+      'Tube 2 mm d\'épaisseur',
+      '50 Pièces/carton'
     ],
     specs: {
       longueur: '150 mm',
@@ -97,7 +120,9 @@ export const products = [
       'Forme en L',
       'Longueur 30cm',
       'Grande stabilité',
-      'Installation polyvalente'
+      'Installation polyvalente',
+      'Tube 2 mm d\'épaisseur',
+      '36 Pièces/carton'
     ],
     specs: {
       longueur: '300 mm',
@@ -117,7 +142,9 @@ export const products = [
       'Longueur réglable',
       'Fixation solide',
       'Ajustement précis',
-      'Installation facile'
+      'Installation facile',
+      'Tube 2 mm d\'épaisseur',
+      '36 Pièces/carton'
     ],
     specs: {
       longueur: '300 mm',
@@ -137,7 +164,9 @@ export const products = [
       'Angle 90°',
       'Montage en coin',
       'Stabilité optimale',
-      'Design compact'
+      'Design compact',
+      'Tube 2 mm d\'épaisseur',
+      '30 Pièces/carton'
     ],
     specs: {
       longueur: '300 mm',
@@ -157,7 +186,9 @@ export const products = [
       'Longueur 50cm',
       'Renforts internes',
       'Résistance accrue',
-      'Installation murale'
+      'Installation murale',
+      'Tube 2 mm d\'épaisseur',
+      '25 Pièces/carton'
     ],
     specs: {
       longueur: '500 mm',
@@ -177,7 +208,9 @@ export const products = [
       'Longueur 50cm',
       'Réglage micrométrique',
       'Fixation renforcée',
-      'Stabilité optimale'
+      'Stabilité optimale',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
     ],
     specs: {
       longueur: '500 mm',
@@ -197,7 +230,9 @@ export const products = [
       'Angle 90°',
       'Longueur 50cm',
       'Montage en coin',
-      'Stabilité renforcée'
+      'Stabilité renforcée',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
     ],
     specs: {
       longueur: '500 mm',
@@ -217,7 +252,9 @@ export const products = [
       'Longueur 80cm',
       'Structure renforcée',
       'Résistance maximale',
-      'Installation professionnelle'
+      'Installation professionnelle',
+      'Tube 2 mm d\'épaisseur',
+      '10 Pièces/carton'
     ],
     specs: {
       longueur: '800 mm',
@@ -237,12 +274,214 @@ export const products = [
       'Forme en L',
       'Longueur 80cm',
       'Stabilité extrême',
-      'Installation professionnelle'
+      'Installation professionnelle',
+      'Tube 2 mm d\'épaisseur',
+      '8 Pièces/carton'
     ],
     specs: {
       longueur: '800 mm',
       charge: '45 kg',
       matériau: 'Alliage haute résistance',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 14,
+    name: 'WS15-E',
+    category: 'supports',
+    image: '/images/products/support-mural-angle-externe-ws15e-15cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural d\'angle externe WS15-E pour une fixation robuste des caméras.',
+    description: 'Le support WS15-E est conçu pour une installation en angle externe, offrant une solution de montage solide et fiable pour vos caméras de surveillance.',
+    features: [
+      'Montage en angle externe',
+      'Tube 2 mm d\'épaisseur',
+      'Construction en alliage',
+      '50 Pièces/carton'
+    ],
+    specs: {
+      longueur: '150 mm',
+      charge: '15 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 15,
+    name: 'WS15-L',
+    category: 'supports',
+    image: '/images/products/support-mural-l-ws15l-15cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural compact en L WS15-L de 15cm.',
+    description: 'Support mural compact en L WS15-L, parfait pour les installations discrètes et rapprochées nécessitant un déport du mur.',
+    features: [
+      'Forme en L compacte',
+      'Longueur 15cm',
+      'Tube 2 mm d\'épaisseur',
+      '50 Pièces/carton'
+    ],
+    specs: {
+      longueur: '150 mm',
+      charge: '18 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 16,
+    name: 'WS30-D',
+    category: 'supports',
+    image: '/images/products/support-mural-droit-ws30d-30cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural droit WS30-D de 30cm pour caméras de surveillance.',
+    description: 'Support mural droit standard WS30-D de 30cm, une solution fiable et robuste pour le montage de la plupart des caméras de vidéosurveillance.',
+    features: [
+      'Longueur 30cm',
+      'Installation murale simple',
+      'Tube 2 mm d\'épaisseur',
+      '40 Pièces/carton'
+    ],
+    specs: {
+      longueur: '300 mm',
+      charge: '22 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 17,
+    name: 'WS30-E',
+    category: 'supports',
+    image: '/images/products/support-mural-angle-externe-ws30e-30cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural d\'angle externe WS30-E de 30cm.',
+    description: 'Support mural WS30-E pour montage en angle externe, offrant une portée de 30cm pour un positionnement optimal de la caméra.',
+    features: [
+      'Montage en angle externe',
+      'Longueur 30cm',
+      'Tube 2 mm d\'épaisseur',
+      '30 Pièces/carton'
+    ],
+    specs: {
+      longueur: '300 mm',
+      charge: '25 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 18,
+    name: 'WS30-F',
+    category: 'supports',
+    image: '/images/products/support-mural-poteau-ws30f-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support de fixation sur poteau WS30-F.',
+    description: 'Le support WS30-F permet de fixer solidement vos équipements de surveillance sur des poteaux de différents diamètres.',
+    features: [
+      'Fixation sur poteau',
+      'Sangles ajustables',
+      'Tube 2 mm d\'épaisseur',
+      '30 Pièces/carton'
+    ],
+    specs: {
+      longueur: 'N/A',
+      charge: '20 kg',
+      matériau: 'Acier et alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 19,
+    name: 'WS30-D+T',
+    category: 'supports',
+    image: '/images/products/support-mural-droit-telescopique-ws30d-plus-t-30cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Kit de support mural droit et télescopique WS30-D+T.',
+    description: 'Ensemble combiné WS30-D+T offrant la polyvalence d\'un support droit et d\'une extension télescopique pour une portée et un ajustement maximum.',
+    features: [
+      'Combinaison Droit + Télescopique',
+      'Portée étendue',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
+    ],
+    specs: {
+      longueur: '30-60 cm',
+      charge: '20 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 20,
+    name: 'WS50-D+T',
+    category: 'supports',
+    image: '/images/products/support-mural-droit-telescopique-ws50d-plus-t-50cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Kit de support mural droit et télescopique longue portée WS50-D+T.',
+    description: 'Ensemble combiné WS50-D+T pour les installations exigeantes, alliant un support droit de 50cm à une extension télescopique pour une portée maximale.',
+    features: [
+      'Combinaison Droit + Télescopique',
+      'Très longue portée',
+      'Tube 2 mm d\'épaisseur',
+      '15 Pièces/carton'
+    ],
+    specs: {
+      longueur: '50-100 cm',
+      charge: '25 kg',
+      matériau: 'Alliage renforcé',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 21,
+    name: 'WS50-E',
+    category: 'supports',
+    image: '/images/products/support-mural-angle-externe-ws50e-50cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural d\'angle externe longue portée WS50-E de 50cm.',
+    description: 'Support mural pour angle externe WS50-E avec une portée de 50cm, idéal pour une surveillance étendue des coins de bâtiments.',
+    features: [
+      'Montage en angle externe',
+      'Longueur 50cm',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
+    ],
+    specs: {
+      longueur: '500 mm',
+      charge: '30 kg',
+      matériau: 'Alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 22,
+    name: 'WS50-F',
+    category: 'supports',
+    image: '/images/products/support-mural-poteau-ws50f-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support de fixation sur poteau renforcé WS50-F.',
+    description: 'Support de fixation sur poteau renforcé WS50-F, conçu pour les équipements plus lourds et les conditions exigeantes.',
+    features: [
+      'Fixation sur poteau renforcée',
+      'Sangles haute résistance',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
+    ],
+    specs: {
+      longueur: 'N/A',
+      charge: '30 kg',
+      matériau: 'Acier et alliage',
+      couleur: 'Blanc'
+    }
+  },
+  {
+    id: 23,
+    name: 'WS50-L',
+    category: 'supports',
+    image: '/images/products/support-mural-l-ws50l-50cm-camera-cctv-dahua-hikvision.webp',
+    altText: 'Support mural en L WS50-L de 50cm.',
+    description: 'Support mural en L WS50-L de 50cm, offrant un déport important pour une vision sans obstruction, même avec des obstacles muraux.',
+    features: [
+      'Forme en L',
+      'Longueur 50cm',
+      'Tube 2 mm d\'épaisseur',
+      '20 Pièces/carton'
+    ],
+    specs: {
+      longueur: '500 mm',
+      charge: '35 kg',
+      matériau: 'Alliage',
       couleur: 'Blanc'
     }
   }
