@@ -492,7 +492,7 @@ export const displayableCategories = [
     id: 'boites',
     name: 'Boîtes de Jonction',
     description: 'Découvrez notre gamme de boîtes de jonction étanches pour vos installations extérieures.',
-    image: '/images/boite-jonction-etanche-camera-dahua-hikvision-3.webp',
+    image: '/images/products/boite-jonction-aj120-camera-cctv-dahua-hikvision.webp',
     count: products.filter(p => p.category === 'boites').length,
     IconComponent: Box
   },
@@ -500,7 +500,7 @@ export const displayableCategories = [
     id: 'supports',
     name: 'Supports Muraux',
     description: 'Supports robustes et réglables pour une installation optimale de vos caméras.',
-    image: '/images/support-mural-22.webp',
+    image: '/images/products/support-mural-telescopique-ws30t-30cm-camera-cctv-dahua-hikvision.webp',
     count: products.filter(p => p.category === 'supports').length,
     IconComponent: PanelTop
   }
